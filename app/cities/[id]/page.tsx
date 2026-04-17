@@ -13,8 +13,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function CityDetailPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function CityDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const city = getCityById(id);
 
   if (!city) {

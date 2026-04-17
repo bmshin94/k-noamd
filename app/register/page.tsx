@@ -1,110 +1,70 @@
-import { Suspense } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { MapPin } from "lucide-react";
-import { signup } from "@/app/auth/actions";
-import RegisterError from "./RegisterError";
+import RegisterForm from "@/components/auth/RegisterForm";
+import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
+import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 export default function RegisterPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4 py-12">
-      <Card className="w-full max-w-md shadow-lg border-emerald-100/50">
-        <CardHeader className="space-y-1 flex flex-col items-center">
-          <Link href="/" className="flex items-center gap-2 mb-4">
-            <MapPin className="h-6 w-6 text-emerald-600" />
-            <span className="text-xl font-bold tracking-tight">
-              Nomad<span className="text-emerald-600">Korea</span>
-            </span>
-          </Link>
-          <CardTitle className="text-2xl font-bold text-center">회원가입</CardTitle>
-          <CardDescription className="text-center">
-            NomadKorea의 새로운 노마드가 되어보세요!
-          </CardDescription>
-        </CardHeader>
-        <form action={signup}>
-          <CardContent className="grid gap-4">
-            <div className="grid gap-2">
-              <label htmlFor="name" className="text-sm font-medium leading-none">
-                이름
-              </label>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="홍길동"
-                required
-                className="border-emerald-100 focus-visible:ring-emerald-600"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="email" className="text-sm font-medium leading-none">
-                이메일
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="name@example.com"
-                required
-                className="border-emerald-100 focus-visible:ring-emerald-600"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="password" className="text-sm font-medium leading-none">
-                비밀번호
-              </label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="border-emerald-100 focus-visible:ring-emerald-600"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="confirm-password" className="text-sm font-medium leading-none">
-                비밀번호 확인
-              </label>
-              <Input
-                id="confirm-password"
-                name="confirm-password"
-                type="password"
-                required
-                className="border-emerald-100 focus-visible:ring-emerald-600"
-              />
-            </div>
-            <Button
-              type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white mt-2"
-            >
-              회원가입하기
-            </Button>
-            <Suspense>
-              <RegisterError />
-            </Suspense>
-          </CardContent>
-        </form>
-        <CardFooter className="flex flex-col gap-4">
-          <div className="text-sm text-center text-muted-foreground">
-            이미 계정이 있으신가요?{" "}
-            <Link
-              href="/login"
-              className="text-emerald-600 hover:underline underline-offset-4 font-medium"
-            >
-              로그인
-            </Link>
+    <div className="flex min-h-[calc(100vh-64px)] w-full overflow-hidden">
+      {/* Brand Image Panel (Desktop only) */}
+      <div className="hidden lg:flex flex-1 relative bg-primary items-center justify-center p-12 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80"
+            alt="Nomad Registration"
+            fill
+            className="object-cover opacity-30"
+          />
+        </div>
+        <div className="relative z-10 max-w-md space-y-6">
+          <h1 className="text-4xl font-black leading-tight">
+            새로운 노마드 시대를<br />지금 시작하세요
+          </h1>
+          <p className="text-lg opacity-90">
+            당신만의 워케이션 기록을 남기고, 전국의 노마드들과 정보를 공유해보세요.
+          </p>
+          <ul className="space-y-4 pt-4">
+            {[
+              "전국 200+ 도시의 작업 공간 정보",
+              "생생한 실제 노마드 후기 확인",
+              "관심 도시 즐겨찾기 및 알림",
+              "노마드 커뮤니티 활동 참여"
+            ].map((text, i) => (
+              <li key={i} className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px]">
+                  ✔
+                </div>
+                <span className="text-sm font-medium">{text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Form Panel */}
+      <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-12 lg:p-16 bg-white">
+        <div className="w-full max-w-sm space-y-8">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-black text-slate-900">회원가입</h2>
+            <p className="text-muted-foreground">
+              노마드 코리아의 가족이 되어 더 많은 혜택을 누리세요.
+            </p>
           </div>
-        </CardFooter>
-      </Card>
+
+          <SocialLoginButtons />
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <Separator />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white px-2 text-muted-foreground">또는 이메일로 가입</span>
+            </div>
+          </div>
+
+          <RegisterForm />
+        </div>
+      </div>
     </div>
   );
 }

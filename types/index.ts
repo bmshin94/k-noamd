@@ -30,8 +30,24 @@ export interface Review {
 
 export interface CommunityPost {
   id: string;
+  category: "후기" | "질문" | "모임" | "정보";
   title: string;
+  content: string;
+  author: string;
+  authorAvatar?: string;
+  cityId?: string;
   likes: number;
   comments: number;
   createdAt: string;
 }
+
+export interface PostComment {
+  id: string;
+  postId: string;
+  author: string;
+  authorAvatar?: string;
+  content: string;
+  createdAt: string;
+  replies?: PostComment[];
+}
+

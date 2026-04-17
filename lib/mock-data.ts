@@ -1,4 +1,4 @@
-import { City, Review, CommunityPost } from "@/types";
+import { City, Review, CommunityPost, PostComment } from "@/types";
 
 export const CITIES: City[] = [
   {
@@ -254,33 +254,143 @@ export const getRelatedCities = (city: City) =>
 export const HOT_POSTS: CommunityPost[] = [
   {
     id: "p1",
+    category: "후기",
     title: "제주 한 달 살기 후기 총정리",
+    content: "제주도 서귀포에서 한 달 동안 워케이션을 다녀왔습니다. 정말 최고의 경험이었어요!",
+    author: "jeju_lover",
+    authorAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=jeju_lover",
+    cityId: "jeju-seogwipo",
     likes: 128,
-    comments: 34,
+    comments: 3,
     createdAt: "2시간 전",
   },
   {
     id: "p2",
+    category: "정보",
     title: "강릉 카페거리 추천 TOP 10",
+    content: "강릉에서 작업하기 좋은 카페 10곳을 골라봤습니다. 와이파이 속도 위주로 정리했어요.",
+    author: "coding_bear",
+    authorAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=coding_bear",
+    cityId: "gangneung",
     likes: 94,
-    comments: 21,
+    comments: 2,
     createdAt: "5시간 전",
   },
   {
     id: "p3",
+    category: "질문",
     title: "부산 vs 제주, 어디가 더 좋아요?",
+    content: "다음 주에 일주일 정도 내려가 있으려고 하는데 어디가 더 작업하기 좋을까요?",
+    author: "wandercode",
+    authorAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=wandercode",
     likes: 76,
-    comments: 58,
-    createdAt: "어제",
-  },
-  {
-    id: "p4",
-    title: "대전 노마드 모임 같이 하실 분?",
-    likes: 52,
-    comments: 17,
+    comments: 5,
     createdAt: "어제",
   },
 ];
+
+export const ALL_POSTS: CommunityPost[] = [
+  ...HOT_POSTS,
+  {
+    id: "p4",
+    category: "모임",
+    title: "대전 노마드 모임 같이 하실 분?",
+    content: "이번 주 토요일 대전 둔산동에서 같이 작업하실 분 구합니다!",
+    author: "tech_wiz",
+    authorAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=tech_wiz",
+    cityId: "daejeon-dunsan",
+    likes: 52,
+    comments: 0,
+    createdAt: "어제",
+  },
+  // 20개 이상 생성을 위한 데이터
+  ...Array.from({ length: 20 }).map((_, i) => ({
+    id: `p-extra-${i}`,
+    category: (["후기", "질문", "모임", "정보"] as const)[i % 4],
+    title: `노마드 라이프 ${i + 5}일차 기록`,
+    content: "오늘도 열심히 코딩하고 있습니다. 노마드 코리아 화이팅!",
+    author: `user_${i}`,
+    authorAvatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=user_${i}`,
+    likes: Math.floor(Math.random() * 50),
+    comments: Math.floor(Math.random() * 10),
+    createdAt: `${i + 2}일 전`,
+  })),
+];
+
+export const ALL_COMMENTS: PostComment[] = [
+  {
+    id: "c1",
+    postId: "p1",
+    author: "nomad_king",
+    authorAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=nomad_king",
+    content: "와 저도 꼭 가보고 싶네요! 정보 감사합니다.",
+    createdAt: "1시간 전",
+    replies: [
+      {
+        id: "c1-1",
+        postId: "p1",
+        author: "jeju_lover",
+        content: "강추드립니다! 정말 좋아요.",
+        createdAt: "30분 전",
+      }
+    ]
+  },
+  {
+    id: "c2",
+    postId: "p1",
+    author: "remote_dev",
+    authorAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=remote_dev",
+    content: "서귀포 숙소는 어디로 잡으셨나요?",
+    createdAt: "2시간 전",
+  }
+];
+
+export interface Notification {
+  id: string;
+  type: "like" | "comment" | "new_city";
+  content: string;
+  targetUrl: string;
+  createdAt: string;
+  isRead: boolean;
+}
+
+export const NOTIFICATIONS: Notification[] = [
+  {
+    id: "n1",
+    type: "like",
+    content: "울 오빠님이 당신의 게시글을 좋아합니다! ✨",
+    targetUrl: "/community/p1",
+    createdAt: "5분 전",
+    isRead: false,
+  },
+  {
+    id: "n2",
+    type: "comment",
+    content: "nomad_king님이 당신의 게시글에 댓글을 남겼습니다: '정말 유익해요!'",
+    targetUrl: "/community/p1",
+    createdAt: "30분 전",
+    isRead: false,
+  },
+  {
+    id: "n3",
+    type: "new_city",
+    content: "새로운 노마드 추천 도시 '제주 애월'이 추가되었습니다! 🍊",
+    targetUrl: "/cities/jeju-aewol",
+    createdAt: "2시간 전",
+    isRead: true,
+  },
+  ...Array.from({ length: 7 }).map((_, i) => ({
+    id: `n-extra-${i}`,
+    type: (["like", "comment"] as const)[i % 2],
+    content: `user_${i}님이 활동을 남겼습니다.`,
+    targetUrl: "/community",
+    createdAt: `${i + 1}일 전`,
+    isRead: i > 2,
+  })),
+];
+
+export const getPostById = (id: string) => ALL_POSTS.find(p => p.id === id);
+export const getCommentsByPostId = (postId: string) => ALL_COMMENTS.filter(c => c.postId === postId);
 
 export const REGION_TABS = [
   { label: "전체", count: 32 },
@@ -291,6 +401,29 @@ export const REGION_TABS = [
   { label: "충청", count: 6 },
   { label: "제주", count: 3 },
 ];
+
+export const USER = {
+  id: "u1",
+  name: "카리나",
+  email: "karina@aespa.com",
+  avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=karina",
+  joinedAt: "2024.01.12",
+  followers: 1250,
+  following: 890,
+  stats: {
+    reviews: 12,
+    favorites: 8,
+    visited: 5,
+  },
+};
+
+export const MY_FAVORITES: City[] = [
+  CITIES[0], // 성수동
+  CITIES[3], // 해운대
+  CITIES[5], // 서귀포
+];
+
+export const MY_REVIEWS: Review[] = ALL_REVIEWS.filter(r => r.author === "remote_dev" || r.author === "nomad_king").slice(0, 3);
 
 export const QUICK_CITIES = [
   { emoji: "🏙️", name: "서울" },

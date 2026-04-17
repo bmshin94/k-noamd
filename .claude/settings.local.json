@@ -7,7 +7,18 @@
       "Bash(npx tsc *)",
       "Bash(npx next *)",
       "Bash(node *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "mcp__supabase__execute_sql",
+      "Bash(npm install *)",
+      "Bash(npx playwright *)",
+      "Bash(find e2e/tests -name \"*.spec.ts\" -exec sed -i 's/test\\\\.todo\\(\\\\\\(.*\\\\\\)\\)/test.skip\\(\\\\1, async \\(\\) => {}\\)/g' {} \\\\;)",
+      "mcp__playwright__browser_navigate",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -v http://localhost:3000)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
 }

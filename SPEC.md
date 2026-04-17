@@ -52,7 +52,7 @@
 
 ---
 
-## - [ ] Phase 2 — 도시 상세 페이지 (`/cities/[id]`)
+## - [x] Phase 2 — 도시 상세 페이지 (`/cities/[id]`)
 
 ### 개요
 홈페이지 도시 카드를 클릭했을 때 이동하는 도시별 상세 페이지를 구현한다. 도시의 상세 점수, 리뷰 목록, 주변 추천 도시를 보여준다. 동적 라우트(`[id]`)를 사용하며, mock data의 `CITIES` 배열에서 `id`로 데이터를 조회한다. 새로운 타입과 mock 데이터를 추가한다.
@@ -63,28 +63,28 @@
 
 ### 수정/개선 항목
 
-- [ ] **`types/index.ts` 보강**: `Review` 타입에 `cityId`, `avatarUrl?`, `helpful` (도움됐어요 수) 필드 추가
-- [ ] **`lib/mock-data.ts` 확장**: 각 도시별 리뷰 3~5개 추가 (총 30개 이상), `getCityById(id)` / `getReviewsByCityId(id)` helper 함수 추가
-- [ ] **`app/cities/[id]/page.tsx`**: Server Component, `params.id`로 도시 조회, 없으면 `notFound()` 처리
-- [ ] **`CityDetailHero`**: 도시 대표 이미지 전체 너비, 이름/지역/별점/리뷰수 오버레이, 즐겨찾기 버튼
-- [ ] **`CityScorePanel`**: wifi/카페/물가/교통 4개 점수를 Progress 바 + 숫자로 표시, 총점 원형 표시 (CSS border-radius 활용)
-- [ ] **`CityReviewList`**: 리뷰 카드 목록, 최신순 정렬 표시, "더 보기" 버튼 (UI만)
-- [ ] **`ReviewCard`**: 작성자 Avatar + 이름, 별점, 날짜, 본문, "도움됐어요 👍 N" 버튼
-- [ ] **`RelatedCities`**: 같은 지역(`region`) 도시 카드 가로 스크롤 (`overflow-x-auto`)
-- [ ] **`WriteReviewButton`**: 우하단 고정 FAB(Floating Action Button) 스타일, 클릭 시 모달 (UI만, `use client`)
-- [ ] **리뷰 작성 모달**: shadcn `Dialog` + 별점 선택 UI + textarea + 제출 버튼 (`npx shadcn@latest add dialog textarea`)
-- [ ] **빵 부스러기 (Breadcrumb)**: 홈 > 도시 목록 > [도시명] 네비게이션 추가 (`npx shadcn@latest add breadcrumb`)
-- [ ] **`generateStaticParams`**: 빌드 시 모든 도시 id로 정적 경로 생성
+- [x] **`types/index.ts` 보강**: `Review` 타입에 `cityId`, `avatarUrl?`, `helpful` (도움됐어요 수) 필드 추가
+- [x] **`lib/mock-data.ts` 확장**: 각 도시별 리뷰 3~5개 추가 (총 30개 이상), `getCityById(id)` / `getReviewsByCityId(id)` helper 함수 추가
+- [x] **`app/cities/[id]/page.tsx`**: Server Component, `params.id`로 도시 조회, 없으면 `notFound()` 처리
+- [x] **`CityDetailHero`**: 도시 대표 이미지 전체 너비, 이름/지역/별점/리뷰수 오버레이, 즐겨찾기 버튼
+- [x] **`CityScorePanel`**: wifi/카페/물가/교통 4개 점수를 Progress 바 + 숫자로 표시, 총점 원형 표시 (CSS border-radius 활용)
+- [x] **`CityReviewList`**: 리뷰 카드 목록, 최신순 정렬 표시, "더 보기" 버튼 (UI만)
+- [x] **`ReviewCard`**: 작성자 Avatar + 이름, 별점, 날짜, 본문, "도움됐어요 👍 N" 버튼
+- [x] **`RelatedCities`**: 같은 지역(`region`) 도시 카드 가로 스크롤 (`overflow-x-auto`)
+- [x] **`WriteReviewButton`**: 우하단 고정 FAB(Floating Action Button) 스타일, 클릭 시 모달 (UI만, `use client`)
+- [x] **리뷰 작성 모달**: shadcn `Dialog` + 별점 선택 UI + textarea + 제출 버튼 (`npx shadcn@latest add dialog textarea`)
+- [x] **빵 부스러기 (Breadcrumb)**: 홈 > 도시 목록 > [도시명] 네비게이션 추가 (`npx shadcn@latest add breadcrumb`)
+- [x] **`generateStaticParams`**: 빌드 시 모든 도시 id로 정적 경로 생성
 
 ### 검증/확인 항목
 
-- [ ] `/cities/seoul-seongsu` 접속 시 성수동 상세 페이지 정상 렌더링 확인
-- [ ] `/cities/존재하지않는id` 접속 시 404 페이지 표시 확인
-- [ ] CityScorePanel 점수 바가 5점 만점 기준 정확한 비율로 표시되는지 확인
-- [ ] RelatedCities 가로 스크롤 모바일에서 정상 동작 확인
-- [ ] WriteReviewButton FAB 클릭 시 Dialog 열림 확인
-- [ ] 홈페이지 CityCard/BestCityCard에서 상세 페이지로 링크 연결 확인
-- [ ] `generateStaticParams` 동작으로 `npm run build` 정적 경로 생성 확인
+- [x] `/cities/seoul-seongsu` 접속 시 성수동 상세 페이지 정상 렌더링 확인
+- [x] `/cities/존재하지않는id` 접속 시 404 페이지 표시 확인
+- [x] CityScorePanel 점수 바가 5점 만점 기준 정확한 비율로 표시되는지 확인
+- [x] RelatedCities 가로 스크롤 모바일에서 정상 동작 확인
+- [x] WriteReviewButton FAB 클릭 시 Dialog 열림 확인
+- [x] 홈페이지 CityCard/BestCityCard에서 상세 페이지로 링크 연결 확인
+- [x] `generateStaticParams` 동작으로 `npm run build` 정적 경로 생성 확인
 
 ---
 
