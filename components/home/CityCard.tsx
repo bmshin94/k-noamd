@@ -1,10 +1,12 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Star, Users, Wifi, Coffee, DollarSign, Train } from "lucide-react";
 import { City } from "@/types";
 import FavoriteButton from "./FavoriteButton";
+import { cn } from "@/lib/utils";
 
 interface ScoreRowProps {
   icon: React.ReactNode;
@@ -16,7 +18,7 @@ function ScoreRow({ icon, label, score }: ScoreRowProps) {
   return (
     <div className="flex items-center gap-2 text-xs">
       <span className="text-muted-foreground w-3">{icon}</span>
-      <span className="text-muted-foreground w-8 shrink-0">{label}</span>
+      <span className="text-muted-foreground w-10 shrink-0">{label}</span>
       <Progress value={(score / 5) * 100} className="h-1.5 flex-1 bg-muted" />
       <span className="text-muted-foreground w-6 text-right">{score.toFixed(1)}</span>
     </div>
@@ -48,7 +50,7 @@ export default function CityCard({ city }: CityCardProps) {
   return (
     <article className="group flex flex-col bg-card rounded-xl border overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* Image */}
-      <div className="relative h-44 overflow-hidden">
+      <Link href={`/cities/${city.id}`} className="relative h-44 overflow-hidden block">
         <Image
           src={city.imageUrl}
           alt={`${city.name} 대표 이미지`}
@@ -59,15 +61,15 @@ export default function CityCard({ city }: CityCardProps) {
         <div className="absolute top-3 right-3">
           <FavoriteButton />
         </div>
-      </div>
+      </Link>
 
       {/* Body */}
       <div className="flex flex-col gap-3 p-4 flex-1">
         {/* City name & region */}
-        <div>
+        <Link href={`/cities/${city.id}`} className="hover:text-primary transition-colors">
           <h3 className="font-semibold text-base">{city.name}</h3>
           <p className="text-xs text-muted-foreground">{city.district}</p>
-        </div>
+        </Link>
 
         {/* Rating */}
         <div className="flex items-center gap-2">
@@ -117,13 +119,15 @@ export default function CityCard({ city }: CityCardProps) {
         </div>
 
         {/* Button */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="mt-auto w-full hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 transition-colors"
+        <Link
+          href={`/cities/${city.id}`}
+          className={cn(
+            buttonVariants({ variant: "outline", size: "sm" }),
+            "mt-auto w-full hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 transition-colors"
+          )}
         >
           자세히 보기
-        </Button>
+        </Link>
       </div>
     </article>
   );

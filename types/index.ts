@@ -19,9 +19,12 @@ export interface City {
 export interface Review {
   id: string;
   author: string;
+  avatarUrl?: string;
   cityName: string;
+  cityId: string;
   rating: number;
   content: string;
+  helpful: number;
   createdAt: string;
 }
 

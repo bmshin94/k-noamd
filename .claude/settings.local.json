@@ -3,7 +3,11 @@
     "allow": [
       "Read(//home/mini80/.cache/ms-playwright/**)",
       "Bash(sudo mkdir *)",
-      "Bash(sudo ln *)"
+      "Bash(sudo ln *)",
+      "Bash(npx tsc *)",
+      "Bash(npx next *)",
+      "Bash(node *)",
+      "Bash(npm run *)"
     ]
   }
 }

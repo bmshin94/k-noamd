@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/mini80/.cache/ms-playwright/**)",
+      "Bash(sudo mkdir *)",
+      "Bash(sudo ln *)"
+    ]
+  }
+}

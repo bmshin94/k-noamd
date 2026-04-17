@@ -1,0 +1,1 @@
+{"timestamp":"2026-04-15T06:34:33.015Z","event":"DENY","hook":"BeforeTool","tool":"write_file","filePath":".env.local","reason":"Matches deny pattern","severity":"HIGH"}

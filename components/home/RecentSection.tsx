@@ -1,8 +1,7 @@
-import { MessageSquare, Flame, ThumbsUp, ArrowRight, Pin } from "lucide-react";
+import { MessageSquare, Flame, ThumbsUp, ArrowRight, Pin, Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Star } from "lucide-react";
 import { RECENT_REVIEWS, HOT_POSTS } from "@/lib/mock-data";
 
 function StarRating({ rating }: { rating: number }) {
@@ -89,7 +88,14 @@ export default function RecentSection() {
                 <div className="flex items-start gap-2">
                   <Pin className="h-3.5 w-3.5 text-muted-foreground mt-0.5 shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{post.title}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium truncate">{post.title}</p>
+                      {post.likes >= 100 && (
+                        <Badge className="text-[10px] h-4 px-1.5 bg-orange-100 text-orange-600 border border-orange-200 shrink-0">
+                          🔥 HOT
+                        </Badge>
+                      )}
+                    </div>
                     <div className="flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <ThumbsUp className="h-3 w-3" />

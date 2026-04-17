@@ -59,7 +59,7 @@ export default function HeroSection() {
         </div>
 
         {/* Stats */}
-        <div className="flex justify-center gap-8 text-sm">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm">
           <span className="flex items-center gap-1.5 text-white/80">
             <CheckCircle2 className="h-4 w-4 text-emerald-400" />
             등록된 도시 32개

@@ -126,28 +126,130 @@ export const RECENT_REVIEWS: Review[] = [
   {
     id: "r1",
     author: "remote_dev",
+    avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=remote_dev",
     cityName: "제주 서귀포",
+    cityId: "jeju-seogwipo",
     rating: 5,
     content: "와이파이 빠르고 카페 분위기도 최고에요!",
+    helpful: 12,
     createdAt: "2시간 전",
   },
   {
     id: "r2",
     author: "코딩하는곰",
+    avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=coding_bear",
     cityName: "강릉 시내",
+    cityId: "gangneung",
     rating: 4,
     content: "커피거리 완전 감성 넘쳐요 ㅎㅎ 추천!",
+    helpful: 8,
     createdAt: "5시간 전",
   },
   {
     id: "r3",
     author: "wandercode",
+    avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=wandercode",
     cityName: "전주 한옥마을",
+    cityId: "jeonju",
     rating: 5,
     content: "물가 저렴하고 분위기 너무 좋아요 재방문 예정",
+    helpful: 15,
     createdAt: "어제",
   },
 ];
+
+export const ALL_REVIEWS: Review[] = [
+  ...RECENT_REVIEWS,
+  {
+    id: "r4",
+    author: "nomad_king",
+    cityName: "서울 성수동",
+    cityId: "seoul-seongsu",
+    rating: 5,
+    content: "성수동은 역시 노마드의 성지입니다. 카페가 정말 많아요.",
+    helpful: 24,
+    createdAt: "3일 전",
+  },
+  {
+    id: "r5",
+    author: "coffee_lover",
+    cityName: "서울 성수동",
+    cityId: "seoul-seongsu",
+    rating: 4,
+    content: "주말에는 사람이 좀 많지만 평일 낮은 정말 작업하기 좋아요.",
+    helpful: 10,
+    createdAt: "1주일 전",
+  },
+  {
+    id: "r6",
+    author: "tech_wiz",
+    cityName: "서울 강남",
+    cityId: "seoul-gangnam",
+    rating: 4,
+    content: "교통이 편리하고 공유오피스가 많아서 좋습니다.",
+    helpful: 18,
+    createdAt: "2일 전",
+  },
+  {
+    id: "r7",
+    author: "ocean_coder",
+    cityName: "부산 해운대",
+    cityId: "busan-haeundae",
+    rating: 5,
+    content: "바다 보면서 코딩하는 기분은 정말 최고예요!",
+    helpful: 32,
+    createdAt: "4일 전",
+  },
+  {
+    id: "r8",
+    author: "starry_night",
+    cityName: "부산 광안리",
+    cityId: "busan-gwangan",
+    rating: 4,
+    content: "야경이 정말 예뻐요. 밤에 산책하기 좋습니다.",
+    helpful: 14,
+    createdAt: "3일 전",
+  },
+  {
+    id: "r9",
+    author: "jeju_lover",
+    cityName: "제주 서귀포",
+    cityId: "jeju-seogwipo",
+    rating: 5,
+    content: "서귀포는 조용하고 집중하기 정말 좋은 곳입니다.",
+    helpful: 21,
+    createdAt: "1주일 전",
+  },
+  {
+    id: "r10",
+    author: "it_specialist",
+    cityName: "서울 홍대",
+    cityId: "seoul-hongdae",
+    rating: 4,
+    content: "활기가 넘치는 곳이에요. 젊은 에너지를 받기 좋습니다.",
+    helpful: 9,
+    createdAt: "5일 전",
+  },
+  // 추가 리뷰 데이터 생략 (총 30개 이상 가정을 위해 더 추가 가능)
+  ...Array.from({ length: 20 }).map((_, i) => ({
+    id: `r-extra-${i}`,
+    author: `user_${i}`,
+    cityName: CITIES[i % CITIES.length].name,
+    cityId: CITIES[i % CITIES.length].id,
+    rating: Math.floor(Math.random() * 2) + 4,
+    content: "분위기 좋고 작업하기 편리한 곳입니다. 추천해요!",
+    helpful: Math.floor(Math.random() * 20),
+    createdAt: `${i + 1}일 전`,
+  })),
+];
+
+export const getCityById = (id: string) => CITIES.find((c) => c.id === id);
+
+export const getReviewsByCityId = (cityId: string) => 
+  ALL_REVIEWS.filter((r) => r.cityId === cityId);
+
+export const getRelatedCities = (city: City) =>
+  CITIES.filter((c) => c.region === city.region && c.id !== city.id).slice(0, 4);
 
 export const HOT_POSTS: CommunityPost[] = [
   {
