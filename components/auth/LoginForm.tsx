@@ -27,21 +27,27 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleLogin} className="space-y-6 w-full">
+    <form onSubmit={handleLogin} className="w-full space-y-6">
       <div className="space-y-2">
         <Label htmlFor="email" className={errors.email ? "text-destructive" : ""}>
           이메일
         </Label>
         <Input
           id="email"
+          name="email"
           type="email"
           placeholder="nomad@example.com"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "email-error" : undefined}
           className={errors.email ? "border-destructive focus-visible:ring-destructive" : ""}
         />
         {errors.email && (
-          <p className="text-xs text-destructive font-medium">{errors.email}</p>
+          <p id="email-error" role="alert" className="text-xs font-medium text-destructive">
+            {errors.email}
+          </p>
         )}
       </div>
 
@@ -59,14 +65,20 @@ export default function LoginForm() {
         </div>
         <Input
           id="password"
+          name="password"
           type="password"
           placeholder="••••••••"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          aria-invalid={Boolean(errors.password)}
+          aria-describedby={errors.password ? "password-error" : undefined}
           className={errors.password ? "border-destructive focus-visible:ring-destructive" : ""}
         />
         {errors.password && (
-          <p className="text-xs text-destructive font-medium">{errors.password}</p>
+          <p id="password-error" role="alert" className="text-xs font-medium text-destructive">
+            {errors.password}
+          </p>
         )}
       </div>
 
